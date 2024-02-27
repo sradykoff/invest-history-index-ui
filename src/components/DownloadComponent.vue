@@ -18,7 +18,7 @@
 
       <q-card-section>
         <q-tabs v-model="tab" dense class="bg-orange text-white shadow-2">
-          <q-tab name="download" label="download" />
+          <q-tab name="download" label="download" v-show="false" />
           <q-tab name="bash" label="bash" />
           <q-tab name="cmd" label="cmd" />
         </q-tabs>
@@ -277,7 +277,7 @@ done
       bashScript,
       cmdScript,
       copyToClipboard,
-      tab: ref('download'),
+      tab: ref('bash'),
       selectedLinks,
       downloadRequest,
       onBashUpdate,
