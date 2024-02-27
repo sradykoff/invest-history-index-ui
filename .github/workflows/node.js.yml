@@ -31,7 +31,7 @@ jobs:
       uses: actions/configure-pages@v3
     - run: npm ci
     - run: npm run build --if-present
-    - run: mkdir ./_site && cp -R ./dist/spa/* ./_site/
+    - run: mkdir ./_site && cp -r ./dist/spa/* ./_site/ && cp ./history-index.json ./_site/
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v2
   # Deploy job
