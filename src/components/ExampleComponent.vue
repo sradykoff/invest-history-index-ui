@@ -52,7 +52,7 @@
 
     <template v-slot:body="props">
       <q-tr :props="props" class="bg-grey-3">
-        <q-td auto-width>
+        <q-td>
           <q-checkbox dense v-model="props.selected" :label="props.row.name" />
         </q-td>
 
@@ -66,28 +66,26 @@
           {{ col.value }}
         </q-td>
         <q-td>
-          <div class="row">
-            <div
-              class="q-pa-md col col-md-3 col-sm-6 col-xs-12"
-              v-ripple
-              v-for="selectedLink in props.row.links"
-              v-bind:key="selectedLink.year"
+          <span
+            class="q-pr-sm col col-md-3 col-sm-6 col-xs-12"
+            v-ripple
+            v-for="selectedLink in props.row.links"
+            v-bind:key="selectedLink.year"
+          >
+            <a
+              href="javascript:void(0)"
+              :title="
+                'Скачать архив ' + selectedLink.year + ' ' + props.row.ticker
+              "
+              @click.prevent="
+                downloadRequest(
+                  selectedLink.link,
+                  selectedLink.year + '-' + props.row.ticker
+                )
+              "
+              ><q-icon name="insert_drive_file" /> {{ selectedLink.year }}</a
             >
-              <a
-                href="javascript:void(0)"
-                :title="
-                  'Скачать архив ' + selectedLink.year + ' ' + props.row.ticker
-                "
-                @click.prevent="
-                  downloadRequest(
-                    selectedLink.link,
-                    selectedLink.year + '-' + props.row.ticker
-                  )
-                "
-                ><q-icon name="insert_drive_file" /> {{ selectedLink.year }}</a
-              >
-            </div>
-          </div>
+          </span>
         </q-td>
       </q-tr>
     </template>
