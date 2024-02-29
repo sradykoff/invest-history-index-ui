@@ -14,7 +14,9 @@ export const useHistoryStore = defineStore('historyStore', {
   getters: {
     historyIndexList(state) {
       return Array.from(state.historyIndex.values())
-        .filter((item) => item.years.length > 0)
+        .filter(
+          (item) => item.links.filter((y) => y.archiveSizeBytes > 22).length > 0
+        )
         .sort((a: HistoryData, b: HistoryData) => a.name.localeCompare(b.name));
     },
     selectedHistory(state) {
@@ -59,10 +61,15 @@ export const useHistoryStore = defineStore('historyStore', {
           uid: jsonObj.uid,
           name: jsonObj.name,
           ticker: jsonObj.ticker,
+          tickerClassCode: jsonObj.tickerClassCode,
           instrumentType: jsonObj.instrumentType as InstrumentType,
           years: (jsonObj.years as Array<any>)?.map((y) => y.year),
           links: (jsonObj.years as Array<any>)?.map((y) => {
-            return { link: toDowloadLink(jsonObj.uid, y.year), year: y.year };
+            return {
+              link: toDowloadLink(jsonObj.uid, y.year),
+              year: y.year,
+              archiveSizeBytes: y.size,
+            };
           }),
         } as HistoryData);
       });

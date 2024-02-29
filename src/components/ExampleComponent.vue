@@ -325,6 +325,15 @@ export default defineComponent({
           sortable: true,
         },
         {
+          name: 'tickerClassCode',
+          required: true,
+          label: 'Class code',
+          align: 'left',
+          field: (row) => row.tickerClassCode,
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
           name: 'years',
           required: true,
           label: 'Links',

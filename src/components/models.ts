@@ -23,6 +23,7 @@ export interface HistoryData {
   readonly uid: string;
   readonly name: string;
   readonly ticker: string;
+  readonly tickerClassCode: string;
   readonly instrumentType: InstrumentType;
   readonly years: number[];
   readonly links: HistoryYearLink[];
@@ -31,6 +32,7 @@ export interface HistoryData {
 type HistoryYearLink = {
   year: number;
   link: string;
+  archiveSizeBytes: number;
 };
 
 export const toDowloadLink = (uid: string, year: number) =>
